@@ -96,3 +96,17 @@ Create annotation refresh page and then switch to admin user.
 As an admin user or teacher you can see the direct effect of Stored XSS via PDF handler.
 
 ![alt text](3.jpeg)
+
+## CVSS Scoring (base metrics and rationale)
+
+**Recommended (based on testing that shows payload executes in Student, Teacher and Admin browser contexts):**
+
+- **Vector:** `CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:H/I:H/A:L`  
+- **Base Score (approx):** **8.9 (High)**  
+- **Rationale:**  
+  - **AV:N (Network):** Attackable over the network (web).  
+  - **AC:L (Low):** Exploit requires no special conditions — a single comment submission triggers execution.  
+  - **PR:L (Low):** Attacker needs a low-privileged authenticated Student account.  
+  - **UI:R (Required):** Another user must view the annotated PDF to trigger the payload.  
+  - **S:C (Scope: Changed):** The payload executes in Teacher and Admin browser contexts (higher-privilege sessions were observed), which means the impact crosses the vulnerable component's security boundary and can be chained to admin-scoped actions.  
+  - **C:H / I:H / A:L:** Confidentiality and integrity impacts are high (cookie/session or admin actions possible if chained); availability impact is low.
